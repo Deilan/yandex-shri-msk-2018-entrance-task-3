@@ -1,0 +1,35 @@
+
+        <!-- $('.timeline__item--active').removeClass('timeline__item--active');
+        var target = evt.target;
+        if (!target.classList.contains('meeting')) {
+            return;
+        }
+        $(target).toggleClass('timeline__item--active');
+        var halfTargetWidth = $(target).width() / 2;
+        $(target).find('.timeline__meeting').css('margin-left', halfTargetWidth); -->
+
+
+<li class="timeline__item" [ngClass]="getNgClass(event)" (click)="onMeetingClick($event);" #timelineItem>
+  <div class="meeting" ></div>
+  <article class="timeline__meeting meeting-details" #details>
+    <h3 class="meeting-details__title">{{event.title}}</h3>
+    <section class="meeting-details__description">
+      <time class="meeting-details__date" datetime="2017-12-14">{{getDate(event)}}</time>,
+      <time class="meeting-details__start-time" datetime="2017-12-14T15:00">{{getStartTime(event)}}</time> –
+      <time class="meeting-details__end-time" datetime="2017-12-14T17:00">{{getEndTime(event)}}</time> ·
+      <span class="meeting-details__room">{{roomTitle}}</span>
+    </section>
+    <section class="meeting-details__attendees">
+      <img alt="Лекс Лютер" src="{{owner.avatarUrl}}" height="24" width="24" class="meeting-details__userpic">
+      <span class="meeting-details__attendees-details">
+        <span class="meeting-details__owner">{{owner.login}}</span>
+        <span class="meeting-details__attendees-count">и {{attendeesCount}} участников</span>
+      </span>
+    </section>
+    <button [routerLink]="['/', 'events', event.id]" type="button" class="meeting-details__edit">
+      <svg class="meeting-details__edit-img">
+        <use xlink:href="#icon-edit"></use>
+      </svg>
+    </button>
+  </article>
+</li>

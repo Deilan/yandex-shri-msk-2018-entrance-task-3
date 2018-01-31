@@ -1,0 +1,6 @@
+<li class="floor">
+  <h3 class="floor__title schedule__top">{{floor.number}} этаж</h3>
+  <ul class="floor__rooms">
+      <app-room *ngFor="let room of floor.rooms" [room]="room"></app-room>
+  </ul>
+</li>

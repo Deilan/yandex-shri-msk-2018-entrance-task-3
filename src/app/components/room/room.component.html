@@ -1,0 +1,17 @@
+<li class="room">
+  <div class="room__description schedule__top">
+    <h4 class="room__title">{{room.title}}</h4>
+    <span class="room__capacity">{{room.capacity}} человек</span>
+  </div>
+  <div class="room__timeline timeline">
+    <div class="timeline__available">
+      <div class="timeline__current-time"></div>
+      <ul class="timeline-list">
+        <!-- <li class="timeline__item timeline__item--vacant meeting meeting--start-time--11-5 meeting--duration--0-55">
+                  <a class="timeline__link" href="create-event.html"></a>
+                </li> -->
+          <app-room-event *ngFor="let event of room.events" [event]="event" [roomTitle]="room.title"></app-room-event>
+      </ul>
+    </div>
+  </div>
+</li>
