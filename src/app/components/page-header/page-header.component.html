@@ -1,0 +1,12 @@
+<div class="page__header" [ngClass]="{'page__header--unfixed': unfixed}">
+  <header class="page__header-inner page-header">
+    <h1 class="page-header__logo">
+      <a [routerLink]="['/']">
+        <svg class="page-header__logo-img">
+          <use xlink:href="#icon-logo"></use>
+        </svg>
+      </a>
+    </h1>
+    <a *ngIf="isButtonDisplayed" routerLink="/create-event" class="page-header__create-event button button--primary">Создать встречу</a>
+  </header>
+</div>

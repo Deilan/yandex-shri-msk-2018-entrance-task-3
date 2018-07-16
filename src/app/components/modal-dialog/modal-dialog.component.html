@@ -1,0 +1,24 @@
+<div class="modal-dialog" [ngClass]="{'modal-dialog--active': isActive}">
+  <div class="modal-dialog__inner">
+    <div class="modal-dialog__content">
+      <ng-content>
+      </ng-content>
+    </div>
+  </div>
+</div>
+<div class="modal-dialog">
+  <div class="modal-dialog__inner">
+    <div class="modal-dialog__content">
+      <div class="notification">
+        <svg class="notification__img notification__img--emoji1">
+          <use xlink:href="#icon-emoji1"></use>
+        </svg>
+        <section class="notification__title ">Встреча будет удалена безвозвратно</section>
+        <section class="notification__actions">
+          <button type="button" class="button notification__action">Отмена</button>
+          <button type="button" class="button notification__action">Удалить</button>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

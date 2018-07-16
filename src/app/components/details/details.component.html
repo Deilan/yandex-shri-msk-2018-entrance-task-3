@@ -1,0 +1,177 @@
+<app-page-header [unfixed]="true"></app-page-header>
+<main class="page__body page-body">
+  <form class="event-form">
+    <div class="event-form__container">
+      <div class="event-form__header page__container-mobile">
+        <h2 class="event-form__title">{{title}}</h2>
+        <button type="button" class="event-form__close-button button button--round" (click)="onDeleteClicked();">
+          <svg class="button__icon">
+            <use xlink:href="#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+      <fieldset class="event-form__fieldset">
+        <div class="page__container-mobile">
+          <h3 class="event-form__legend">Тема</h3>
+          <div class="field-container event-form__field">
+            <input id="title" type="text" class="field" placeholder="О чём будете говорить?" [(ngModel)]="event.title" name="title">
+            <button type="button" class="field-container__button" (click)="event.title = ''">
+              <svg class="field-container__icon">
+                <use xlink:href="#icon-close"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="event-form__fieldset event-form__fieldset--line">
+        <div class="page__container-mobile datetime">
+          <h3 class="event-form__legend datetime__datetime-title">Дата и время</h3>
+          <section class="datetime__date">
+            <h3 class="event-form__legend datetime__date-title">Дата</h3>
+            <div class="field-container">
+              <!-- [(ngModel)]="event.date"  -->
+              <input id="date" type="text" class="field" name="date" [(ngModel)]="event.date" [owlDateTime]="date" [owlDateTimeTrigger]="date">
+              <owl-date-time #date [pickerType]="'calendar'"></owl-date-time>
+              <button type="button" class="field-container__button">
+                <svg class="field-container__icon">
+                  <use xlink:href="#icon-calendar"></use>
+                </svg>
+              </button>
+            </div>
+          </section>
+          <section class="datetime__time-range time-range">
+            <div class="time-range__start">
+              <label for="time-start" class="datetime__time-start-title event-form__legend">Начало</label>
+              <input id="time-start" class="time-range__field field" name="startTime" [(ngModel)]="event.startTime" [owlDateTime]="startTime"
+                [owlDateTimeTrigger]="startTime">
+              <owl-date-time #startTime [pickerType]="'timer'"></owl-date-time>
+            </div>
+            <span class="time-range__separator">–</span>
+            <div class="time-range__end">
+              <label for="time-end" class="datetime__time-start-title event-form__legend">Конец</label>
+              <input id="time-end" class="time-range__field field" name="endTime" [(ngModel)]="event.endTime" [owlDateTime]="endTime" [owlDateTimeTrigger]="endTime">
+              <owl-date-time #endTime [pickerType]="'timer'"></owl-date-time>
+            </div>
+          </section>
+        </div>
+      </fieldset>
+      <fieldset class="event-form__fieldset event-form__fieldset--line">
+        <div class="page__container-mobile">
+          <h3 class="event-form__legend">Участники</h3>
+          <div class="dropdown">
+            <input type="text" class="dropdown__field field" placeholder="Например, Тор Одинович" >
+            <ul class="dropdown__options-list" >
+              <li *ngFor="let userOption of getUsersOptions()" class="dropdown__options-item" (mousedown)="onUserSelected(userOption);">
+                <article class="user">
+                  <img *ngIf="userOption.avatarUrl" alt="{{userOption.login}}" src="{{userOption?.avatarUrl}}" height="24" width="24" class="user__pic">
+                  <section class="user__description">
+                    <span class="user__name">{{userOption.login}}</span> ·
+                    <span class="user__floor">{{userOption.homeFloor}} этаж</span>
+                  </section>
+                </article>
+              </li>
+            </ul>
+            <ul class="dropdown__selected-list">
+              <li *ngFor="let user of event.users" class="dropdown__selected-item">
+                <article class="user">
+                  <img *ngIf="user.avatarUrl" alt="{{user.login}}" src="{{user.avatarUrl}}" height="32" width="32" class="user__pic">
+                  <span class="user__name dropdown__selected-item-content">{{user.login}}</span>
+                  <button type="button" class="dropdown__remove-item" (click)="onRemoveUserClick(user);">
+                    <svg class="dropdown__remove-img">
+                      <use xlink:href="#icon-close"></use>
+                    </svg>
+                  </button>
+                </article>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="event-form__fieldset">
+        <div class="page__container-mobile">
+          <h3 class="event-form__legend">Рекомендованные переговорки</h3>
+          <ul class="options">
+            <li *ngIf="event.room" class="options__item">
+              <div class="available-room available-room--active">
+                <div class="available-room__time-range">
+                  <span class="available-room__time-start">16:00</span> –
+                  <span class="available-room__time-end">16:30</span>
+                </div>
+                <div class="available-room__room">
+                  <span class="available-room__title">Готем</span> ·
+                  <span class="available-room__floor">4 этаж</span>
+                </div>
+                <button type="button" class="avaiable-room__close" (click)="onRoomCloseClick();">
+                  <svg class="avaiable-room__close-img">
+                    <use xlink:href="#icon-close-white"></use>
+                  </svg>
+                </button>
+              </div>
+            </li>
+            <!-- <li class="options__item">
+              <div class="available-room">
+                <input name="room" type="radio" class="available-room__field" id="nonplowed-field" value="nonplowed-field">
+                <div class="available-room__time-range">
+                  <span class="available-room__time-start">16:00</span> –
+                  <span class="available-room__time-end">16:30</span>
+                </div>
+                <div class="available-room__room">
+                  <span class="available-room__title">Поле непаханное</span> ·
+                  <span class="available-room__floor">4 этаж</span>
+                </div>
+                <button type="button" class="avaiable-room__close">
+                  <svg class="avaiable-room__close-img">
+                    <use xlink:href="#icon-close-white"></use>
+                  </svg>
+                </button>
+              </div>
+            </li>
+            <li class="options__item">
+              <div class="available-room">
+                <input name="room" type="radio" class="available-room__field" id="dark-tower" value="dark-tower">
+                <div class="available-room__time-range">
+                  <span class="available-room__time-start">16:00</span> –
+                  <span class="available-room__time-end">16:30</span>
+                </div>
+                <div class="available-room__room">
+                  <span class="available-room__title">Тёмная башня</span> ·
+                  <span class="available-room__floor">4 этаж</span>
+                </div>
+                <button type="button" class="avaiable-room__close">
+                  <svg class="avaiable-room__close-img">
+                    <use xlink:href="#icon-close-white"></use>
+                  </svg>
+                </button>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </fieldset>
+    </div>
+    <footer class="event-form__footer">
+      <section class="event-form__hint">
+        <div class="page__container-mobile">Выберите переговорку</div>
+      </section>
+      <section class="event-form__actions">
+        <div class="page__container-mobile">
+          <div class="event-form__buttonset">
+            <button type="button" class="button button--primary" (click)="onSaveClick();">Сохранить</button>
+            <button type="button" class="button" (click)="onCancelClick();">Отмена</button>
+          </div>
+        </div>
+      </section>
+    </footer>
+  </form>
+</main>
+<app-modal-dialog [isActive]="isDialogDisplayed">
+  <div class="notification">
+    <svg class="notification__img notification__img--emoji1">
+      <use xlink:href="#icon-emoji1"></use>
+    </svg>
+    <section class="notification__title ">Встреча будет удалена безвозвратно</section>
+    <section class="notification__actions">
+      <button type="button" class="button notification__action" (click)="isDialogDisplayed = false">Отмена</button>
+      <button type="button" class="button notification__action" (click)="onDeleteConfirmed();">Удалить</button>
+    </section>
+  </div>
+</app-modal-dialog>

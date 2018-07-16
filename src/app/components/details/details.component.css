@@ -1,0 +1,10 @@
+/* .dropdown__options-list {
+  display: block;
+} */
+/* .dropdown__options-list:hover {
+  display: block;
+} */
+
+.hidden {
+  display: none;
+}

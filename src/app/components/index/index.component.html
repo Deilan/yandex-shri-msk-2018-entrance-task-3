@@ -1,0 +1,83 @@
+<app-page-header [isButtonDisplayed]="true"></app-page-header>
+<main class="page__schedule schedule">
+  <ul class="schedule__floors">
+      <app-floor *ngFor="let floor of floors" [floor]="floor"></app-floor>
+  </ul>
+  <div class="schedule__header-inner">
+    <div class="schedule__slider">
+      <div class="schedule__slider-inner">
+        <div class="slider">
+          <button type="button" class="slider__prev">
+            <svg class="slider__img slider__img--left">
+              <use xlink:href="#icon-arrow2"></use>
+            </svg>
+          </button>
+          <time class="slider__content schedule__slider-date" datetime="2017-12-14">14 дек · Сегодня</time>
+          <button type="button" class="slider__next">
+            <svg class="slider__img slider__img--right">
+              <use xlink:href="#icon-arrow"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="schedule__calendar">
+        <div class="schedule__calendar-inner">Календарь</div>
+      </div>
+    </div>
+    <div class="schedule__day-timeline day-timeline">
+      <div class="day-timeline__current-time">
+        <span class="day-timeline__time">11:05</span>
+      </div>
+      <ul class="day-timeline__list">
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">08:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">09:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">10:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">11:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">12:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">13:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">14:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">15:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">16:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">17:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">18:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">19:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">20:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">21:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">22:00</span>
+        </li>
+        <li class="day-timeline__item">
+          <span class="day-timeline__time">23:00</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>
